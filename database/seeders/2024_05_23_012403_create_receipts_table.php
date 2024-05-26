@@ -21,6 +21,7 @@ class CreateReceiptsTable extends Migration
             $table->text('prescription')->nullable();
             $table->decimal('balance', 8, 2)->default(0);
             $table->decimal('discount', 8, 2)->default(0);
+            $table->decimal('total_cost', 8, 2); // Add the total_cost column
             $table->timestamps();
 
             // Foreign key constraints
@@ -54,4 +55,3 @@ class CreateReceiptsTable extends Migration
         Schema::dropIfExists('receipts');
     }
 }
-

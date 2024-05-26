@@ -22,43 +22,31 @@
 
                     <form id="receipt-form" action="{{ route('receipts.store') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="patient_id" id="patient_id">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div id="patients" class="mt-4">
                                 <div class="flex items-center patient-row mb-4" data-index="0">
                                     <div class="w-1/2 pr-2">
-                                        <label for="patient_name_0"
-                                            class="block text-sm font-medium text-gray-700">Patient</label>
-                                        <select id="patient_name_0" name="patients[0][name]" required
-                                            class="patient-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                        <label for="patient_id_0" class="block text-sm font-medium text-gray-700">Patient</label>
+                                        <select id="patient_id_0" name="patients[0][id]" required class="patient-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                             <option value="">Select a patient</option>
                                             @foreach ($patients as $patient)
-                                                <option value="{{ $patient->name }}" data-id="{{ $patient->id }}" data-balance="{{ $patient->balance }}">{{ $patient->name }}</option>
+                                                <option value="{{ $patient->id }}" data-balance="{{ $patient->balance }}">{{ $patient->name }}</option>
                                             @endforeach
                                         </select>
-                                        <input type="hidden" name="patients[0][id]" id="patient_id_0">
                                     </div>
                                     <div class="w-1/2 pl-2">
-                                        <label for="patient_balance_0"
-                                            class="block text-sm font-medium text-gray-700">Balance</label>
-                                        <input type="number" name="patients[0][balance]" id="patient_balance_0"
-                                            step="0.01" min="0" required
-                                            class="patient-balance mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                                            readonly>
+                                        <label for="patient_balance_0" class="block text-sm font-medium text-gray-700">Balance</label>
+                                        <input type="number" name="patients[0][balance]" id="patient_balance_0" step="0.01" min="0" required class="patient-balance mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" readonly>
                                     </div>
-                                    <button type="button"
-                                        class="remove-patient ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Remove</button>
+                                    <button type="button" class="remove-patient ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Remove</button>
                                 </div>
                             </div>
-                            <button type="button" id="add-patient"
-                                class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add
-                                Patient</button>
+                            <button type="button" id="add-patient" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Patient</button>
                         </div>
 
                         <div>
                             <label for="issued_by" class="block text-sm font-medium text-gray-700">Issued By</label>
-                            <select id="issued_by" name="issued_by" required
-                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <select id="issued_by" name="issued_by" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
@@ -67,8 +55,7 @@
 
                         <div>
                             <label for="doctor_id" class="block text-sm font-medium text-gray-700">Doctor</label>
-                            <select id="doctor_id" name="doctor_id" required
-                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <select id="doctor_id" name="doctor_id" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}">{{ $employee->name }}</option>
                                 @endforeach
@@ -76,51 +63,37 @@
                         </div>
 
                         <div>
-                            <label for="prescription"
-                                class="block text-sm font-medium text-gray-700">Prescription</label>
-                            <input type="text" name="prescription" id="prescription"
-                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <label for="prescription" class="block text-sm font-medium text-gray-700">Prescription</label>
+                            <input type="text" name="prescription" id="prescription" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                         </div>
 
                         <div>
                             <label for="discount" class="block text-sm font-medium text-gray-700">Discount</label>
-                            <input type="number" name="discount" id="discount" step="0.01" min="0"
-                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <input type="number" name="discount" id="discount" step="0.01" min="0" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                         </div>
 
                         <div id="procedures" class="mt-4">
                             <div class="flex items-center procedure-row mb-4" data-index="0">
                                 <div class="w-1/2 pr-2">
-                                    <label for="procedure_name_0"
-                                        class="block text-sm font-medium text-gray-700">Procedure</label>
-                                    <select id="procedure_name_0" name="procedures[0][name]" required
-                                        class="procedure-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                    <label for="procedure_id_0" class="block text-sm font-medium text-gray-700">Procedure</label>
+                                    <select id="procedure_id_0" name="procedures[0][id]" required class="procedure-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                         <option value="">Select a procedure</option>
                                         @foreach ($procedures as $procedure)
-                                            <option value="{{ $procedure->name }}" data-id="{{ $procedure->id }}" data-cost="{{ $procedure->amount }}">{{ $procedure->name }}</option>
+                                            <option value="{{ $procedure->id }}" data-cost="{{ $procedure->amount }}">{{ $procedure->name }}</option>
                                         @endforeach
                                     </select>
-                                    <input type="hidden" name="procedures[0][id]" id="procedure_id_0">
                                 </div>
                                 <div class="w-1/2 pl-2">
-                                    <label for="procedure_cost_0"
-                                        class="block text-sm font-medium text-gray-700">Cost</label>
-                                    <input type="number" name="procedures[0][cost]" id="procedure_cost_0"
-                                        step="0.01" min="0" required
-                                        class="procedure-cost mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                                        readonly>
+                                    <label for="procedure_cost_0" class="block text-sm font-medium text-gray-700">Cost</label>
+                                    <input type="number" name="procedures[0][cost]" id="procedure_cost_0" step="0.01" min="0" required class="procedure-cost mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" readonly>
                                 </div>
                                 <button type="button" class="remove-procedure ml-3 bg-red-500 hover:bg-red-700 text-white font-bold py-0 px-2 rounded">X</button>
                             </div>
                         </div>
-                        <button type="button" id="add-procedure"
-                            class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add
-                            Procedure</button>
+                        <button type="button" id="add-procedure" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Procedure</button>
 
                         <div class="mt-8">
-                            <button type="submit"
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create
-                                Receipt</button>
+                            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Receipt</button>
                         </div>
                     </form>
                 </div>
@@ -141,14 +114,13 @@
 
                 newPatientRow.innerHTML = `
                     <div class="w-1/2 pr-2">
-                        <label for="patient_name_${patientIndex}" class="block text-sm font-medium text-gray-700">Patient</label>
-                        <select id="patient_name_${patientIndex}" name="patients[${patientIndex}][name]" required class="patient-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <label for="patient_id_${patientIndex}" class="block text-sm font-medium text-gray-700">Patient</label>
+                        <select id="patient_id_${patientIndex}" name="patients[${patientIndex}][id]" required class="patient-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                             <option value="">Select a patient</option>
                             @foreach ($patients as $patient)
-                                <option value="{{ $patient->name }}" data-id="{{ $patient->id }}" data-balance="{{ $patient->balance }}">{{ $patient->name }}</option>
+                                <option value="{{ $patient->id }}" data-balance="{{ $patient->balance }}">{{ $patient->name }}</option>
                             @endforeach
                         </select>
-                        <input type="hidden" name="patients[${patientIndex}][id]" id="patient_id_${patientIndex}">
                     </div>
                     <div class="w-1/2 pl-2">
                         <label for="patient_balance_${patientIndex}" class="block text-sm font-medium text-gray-700">Balance</label>
@@ -158,8 +130,7 @@
                 `;
 
                 patientsDiv.appendChild(newPatientRow);
-                attachEventListenersToSelect(newPatientRow.querySelector('.patient-select'),
-                    '.patient-balance', '.patient-id');
+                attachEventListenersToSelect(newPatientRow.querySelector('.patient-select'), '.patient-balance');
                 attachRemoveButtonListener(newPatientRow.querySelector('.remove-patient'));
                 patientIndex++;
             });
@@ -172,14 +143,13 @@
 
                 newProcedureRow.innerHTML = `
                     <div class="w-1/2 pr-2">
-                        <label for="procedure_name_${procedureIndex}" class="block text-sm font-medium text-gray-700">Procedure</label>
-                        <select id="procedure_name_${procedureIndex}" name="procedures[${procedureIndex}][name]" required class="procedure-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <label for="procedure_id_${procedureIndex}" class="block text-sm font-medium text-gray-700">Procedure</label>
+                        <select id="procedure_id_${procedureIndex}" name="procedures[${procedureIndex}][id]" required class="procedure-select mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                             <option value="">Select a procedure</option>
                             @foreach ($procedures as $procedure)
-                                <option value="{{ $procedure->name }}" data-id="{{ $procedure->id }}" data-cost="{{ $procedure->amount }}">{{ $procedure->name }}</option>
+                                <option value="{{ $procedure->id }}" data-cost="{{ $procedure->amount }}">{{ $procedure->name }}</option>
                             @endforeach
                         </select>
-                        <input type="hidden" name="procedures[${procedureIndex}][id]" id="procedure_id_${procedureIndex}">
                     </div>
                     <div class="w-1/2 pl-2">
                         <label for="procedure_cost_${procedureIndex}" class="block text-sm font-medium text-gray-700">Cost</label>
@@ -189,22 +159,17 @@
                 `;
 
                 proceduresDiv.appendChild(newProcedureRow);
-                attachEventListenersToSelect(newProcedureRow.querySelector('.procedure-select'),
-                    '.procedure-cost', '.procedure-id');
+                attachEventListenersToSelect(newProcedureRow.querySelector('.procedure-select'), '.procedure-cost');
                 attachRemoveButtonListener(newProcedureRow.querySelector('.remove-procedure'));
                 procedureIndex++;
             });
 
-            function attachEventListenersToSelect(selectElement, balanceInputClass, idInputClass) {
+            function attachEventListenersToSelect(selectElement, inputClass) {
                 selectElement.addEventListener('change', function(e) {
                     let selectedOption = e.target.options[e.target.selectedIndex];
-                    let balanceValue = selectedOption.getAttribute('data-balance');
-                    let idValue = selectedOption.getAttribute('data-id');
-                    let balanceInput = e.target.closest('.flex').querySelector(balanceInputClass);
-                    let idInput = e.target.closest('.flex').querySelector(idInputClass);
-                    
-                    if (balanceInput) balanceInput.value = balanceValue;
-                    if (idInput) idInput.value = idValue;
+                    let value = selectedOption.getAttribute('data-' + inputClass.split('-')[1]);
+                    let input = e.target.closest('.flex').querySelector(inputClass);
+                    input.value = value;
                 });
             }
 
@@ -216,11 +181,11 @@
 
             // Initial attachment for dynamically created elements
             document.querySelectorAll('.patient-select').forEach(selectElement => {
-                attachEventListenersToSelect(selectElement, '.patient-balance', '.patient-id');
+                attachEventListenersToSelect(selectElement, '.patient-balance');
             });
 
             document.querySelectorAll('.procedure-select').forEach(selectElement => {
-                attachEventListenersToSelect(selectElement, '.procedure-cost', '.procedure-id');
+                attachEventListenersToSelect(selectElement, '.procedure-cost');
             });
 
             document.querySelectorAll('.remove-patient').forEach(button => {

@@ -18,6 +18,7 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Procedure</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Balance</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $patient->contact }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $patient->age }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $patient->procedure->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">UGX {{ $patient->balance }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <a href="{{ route('patients.show', $patient) }}" class="text-indigo-600 hover:text-indigo-900 mr-2">View</a>
                                 <a href="{{ route('patients.edit', $patient) }}" class="text-blue-600 hover:text-blue-900 mr-2">Edit</a>
