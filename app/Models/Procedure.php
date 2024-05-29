@@ -44,5 +44,13 @@ class Procedure extends Model
         $procedures = Procedure::all();
         return view('procedures.form', compact('procedures'));
     }
+    use HasFactory;
+
+    public function receipts()
+    {
+        return $this->belongsToMany(Receipt::class, 'receipt_procedure')
+                    ->withPivot('cost')
+                    ->withTimestamps();
+    }
 
 }

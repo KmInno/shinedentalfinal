@@ -39,5 +39,11 @@ class Receipt extends Model
     {
         return $this->belongsTo(Procedure::class);
     }
+    public function procedures()
+    {
+        return $this->belongsToMany(Procedure::class, 'receipt_procedure')
+                    ->withPivot('cost')
+                    ->withTimestamps();
+    }
 }
 
